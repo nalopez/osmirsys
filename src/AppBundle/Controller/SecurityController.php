@@ -23,7 +23,7 @@ class SecurityController extends Controller
     	$params['username'] = $request->query->get('_username');
     	$params['password'] = $request->query->get('_password');
 
-		if ($manager->checkLoginCredentials($params)) {
+		if (!empty($params['username']) && !empty($params['password']) && $manager->checkLoginCredentials($params)) {
 			return $this->redirectToRoute('homepage');
 		}
 
