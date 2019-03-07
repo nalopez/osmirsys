@@ -1,0 +1,12 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: db
+    database_port: 3306
+    database_name: osmirsys
+    database_user: user
+    database_password: pass
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    secret: 221f9551415a9b840ab377a94368f4c4d850cb44

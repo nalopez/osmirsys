@@ -1,0 +1,17 @@
+
+{% if (app.session.get('userId')) %}
+
+<div>
+    <div>Hello {{ app.session.get('username') }}! <a href="/logout">Logout</a></div>
+    <div> Your last login is on {{ app.session.get('lastLogin') }} </div>
+</div>
+
+<div>
+	<ul>
+		<li> <a href="/">Home</a>
+		<li> <a href="/users">Users</a>
+		<li> <a href="/tenants">Tenants</a>
+	</ul>
+</div>
+
+{% endif %}

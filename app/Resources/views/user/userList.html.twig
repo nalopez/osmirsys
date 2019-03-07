@@ -1,0 +1,34 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+    <div><a href="/users/add"> Add New User </a></div>
+
+    <h2> User List </h2>
+
+    {% if userList|length > 0 %}
+    <table>
+        <tr>
+            <td> #
+            <td> Username
+            <td> Name
+            <td> Status
+            <td> Last Login
+            <td> Actions
+        </tr>
+        {% set inc = 1 %}
+        {% for user in userList %}
+        <tr>
+            <td> {{ inc }}
+            <td> {{ user.username }}
+            <td> {{ user.firstName }} {{ user.lastName }}
+            <td> {{ user.statusName|capitalize }}
+            <td> {{ user.lastLogin }}
+            <td>
+        </tr>
+        {% set inc = inc + 1 %}
+        {% endfor %}
+    </table>
+    {% else %}
+    No results found.
+    {% endif %}
+{% endblock %}
