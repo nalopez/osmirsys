@@ -1,0 +1,77 @@
+body {
+	font-size: 14px;
+}
+
+/** ============ TABLES ============ **/
+table {
+	margin: 0 auto;
+	min-width: 1000px;
+}
+
+tr:nth-child(odd) {
+	background: #CCC
+}
+
+th {
+	background-color: black;
+	color: white;
+	padding: 5px;
+	text-align: center;
+}
+
+td {
+	padding: 5px;
+}
+
+/** ============ LINKS ============ **/
+a {
+	color: white;
+}
+
+/** ============ FORM ELEMENTS ============ **/
+button {
+	background-color: green;
+	border-color: green;
+	color: white;
+	padding: 2px;
+}
+
+/** ============ OTHER HTML ELEMENTS ============ **/
+hr {
+	height: 1px;
+}
+
+/** ============ CUSTOM CLASSES ============ **/
+div.action-icon {
+	float: left;
+}
+
+div.edit {
+	background: url('/images/icons.png') 0 0;
+	height: 19px;
+    width: 20px;
+}
+
+div.activate {
+	background: url('/images/icons.png') -20px 0;
+	height: 19px;
+    width: 20px;
+}
+
+div.deactivate {
+	background: url('/images/icons.png') -43px 0;
+	height: 20px;
+    width: 22px;
+}
+
+.content {
+	margin: 5px 20px;
+}
+
+.page-title {
+	float: left;
+}
+
+.add-button {
+	float: right;
+}

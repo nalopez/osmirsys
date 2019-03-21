@@ -1,13 +1,19 @@
 
 {% if (app.session.get('userId')) %}
 
-<div>
-    <div>Hello {{ app.session.get('username') }}! <a href="/logout">Logout</a></div>
-    <div> Your last login is on {{ app.session.get('lastLogin') }} </div>
+<div id="header-ribbon">
+	<div id="sytem-name">
+		<h2>Osmirsys 1.0</h2>
+	</div>
+	<div id="user-header">
+	    <div>Hello {{ app.session.get('username') }}! <a href="/logout">Logout</a></div>
+	    <div>Your last login is on {{ app.session.get('lastLogin') }} </div>
+	</div>
+	<div class="clearfix"></div>
 </div>
 
 <div>
-	<ul>
+	<ul id="header-tab">
 		<li> <a href="/">Home</a>
 		<li> <a href="/users">Users</a>
 		<li> <a href="/tenants">Tenants</a>

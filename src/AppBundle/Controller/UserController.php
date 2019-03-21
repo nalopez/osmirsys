@@ -56,7 +56,7 @@ class UserController extends Controller
             ->add('firstName', TextType::class)
             ->add('lastName', TextType::class)
             ->add('username', TextType::class)
-            ->add('password', Passwordtype::class)
+            ->add('password', PasswordType::class)
             ->add('save', SubmitType::class, ['label' => 'Add User'])
             ->getForm();
 
@@ -66,7 +66,6 @@ class UserController extends Controller
 
             // Save User
             $addResult = $manager->addUser($data);
-
             if (!empty($addResult)) {
                 return $this->redirectToRoute('users');
             }

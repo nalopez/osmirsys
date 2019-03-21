@@ -1,0 +1,27 @@
+#header-ribbon {
+	background-color: gray;
+}
+
+#sytem-name {
+	float: left;
+	margin-left: 10px;
+	vertical-align: middle;
+}
+
+#user-header {
+	float: right;
+	margin-right: 10px;
+}
+
+#header-tab {
+	background-color: green;
+	display: inline-flex;
+	list-style-type: none;
+	padding-left: 0;
+	width: 100%;
+}
+
+#header-tab li {
+	display: inline-flex;
+	margin: 5px 10px;
+}

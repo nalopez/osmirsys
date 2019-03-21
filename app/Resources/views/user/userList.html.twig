@@ -1,19 +1,25 @@
 {% extends "base.html.twig" %}
 
 {% block content %}
-    <div><a href="/users/add"> Add New User </a></div>
-
-    <h2> User List </h2>
+    <div class="page-title">
+        <h3> User List </h3>
+    </div>
+    <div class="add-button">
+        <a href="/users/add"> <button>Add New User</button> </a>
+    </div>
+    <div class="clearfix"></div>
+    <hr>
 
     {% if userList|length > 0 %}
     <table>
         <tr>
-            <td> #
-            <td> Username
-            <td> Name
-            <td> Status
-            <td> Last Login
-            <td> Actions
+            <th> #
+            <th> Username
+            <th> Name
+            <th> Status
+            <th> Created By
+            <th> Last Login
+            <th> Actions
         </tr>
         {% set inc = 1 %}
         {% for user in userList %}
@@ -22,8 +28,21 @@
             <td> {{ user.username }}
             <td> {{ user.firstName }} {{ user.lastName }}
             <td> {{ user.statusName|capitalize }}
+            <td>
             <td> {{ user.lastLogin }}
             <td>
+                {% set activateClass = 'activate' %}
+                {% if user.statusCode == 'ACT' %}
+                    {% set activateClass = 'deactivate' %}
+                {% endif %}
+
+                <a href="users/edit/{{ user.userId }}">
+                    <div class="action-icon edit"></div>
+                </a>
+                <a href="users/{{ activateClass }}/{{ user.userId }}">
+                    <div class="action-icon {{ activateClass }}"></div>
+                </a>
+            </td>
         </tr>
         {% set inc = inc + 1 %}
         {% endfor %}

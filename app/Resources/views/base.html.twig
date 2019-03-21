@@ -5,12 +5,16 @@
         <title>{% block title %} Osmirsys 1.0 {% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="stylesheet" href="{{ asset('css/vendor/bootstrap.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('css/base.css') }}" />
+        <link rel="stylesheet" href="{{ asset('css/header.css') }}" />
     </head>
     <body>
         {% include 'header.html.twig' %}
 
-        {% block content %}{% endblock %}
+        <div class="content">{% block content %}{% endblock %}</div>
         
         {% block javascripts %}{% endblock %}
     </body>
+    {% include 'footer.html.twig' %}
 </html>
