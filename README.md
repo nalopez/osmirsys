@@ -1,4 +1,4 @@
-symfony
+Osmirsys 1.0
 =======
 
-A Symfony project created on March 5, 2019, 6:42 pm.
+A Symfony project created to monitor the tenant activities under OsMir Enterprise.
