@@ -1,0 +1,64 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+    <div class="page-title">
+        <h3> Tenant List </h3>
+    </div>
+    <div class="add-button">
+        <a href="/tenants/add"> <button>Add New Cycle</button> </a>
+    </div>
+    <div class="clearfix"></div>
+    <hr>
+
+    {% if cycleList|length > 0 %}
+    <table>
+        <tr>
+            <th> #
+            <th> Name
+            <th> Pen Code
+            <th> Location
+            <th> Cycle Count
+            <th> Head Count
+            <th> Start Date
+            <th> End Date
+            <th> Status
+            <th> Created By
+            <th> Actions
+        </tr>
+        {% set inc = 1 %}
+        {% for cycle in cycleList %}
+        <tr>
+            <td> {{ inc }}
+            <td> {{ cycle.firstName }} {{ cycle.lastName }}
+            <td> {{ cycle.penCode }}
+            <td> {{ cycle.locationName }}
+            <td> {{ cycle.cycleCount }}
+            <td> {{ cycle.headCount }}
+            <td> {{ cycle.startDate }}
+            <td> {{ cycle.endDate }}
+            <td> {{ cycle.statusName|capitalize }}
+            <td> {{ cycle.createdByUsername }}
+            <td>
+                {% set activateClass = 'activate' %}
+                {% if cycle.statusCode == 'ACT' %}
+                    {% set activateClass = 'deactivate' %}
+                {% endif %}
+
+                <a href="tenants/viewInfo/{{ cycle.tenantId }}">
+                    <div class="action-icon view-info"></div>
+                </a>
+                <a href="tenants/edit/{{ cycle.tenantId }}">
+                    <div class="action-icon edit"></div>
+                </a>
+                <a href="tenants/{{ activateClass }}/{{ cycle.tenantId }}">
+                    <div class="action-icon {{ activateClass }}"></div>
+                </a>
+            </td>
+        </tr>
+        {% set inc = inc + 1 %}
+        {% endfor %}
+    </table>
+    {% else %}
+    No results found.
+    {% endif %}
+{% endblock %}

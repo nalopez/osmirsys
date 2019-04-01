@@ -1,0 +1,41 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+    <div class="page-title">
+        <h3> Pen List </h3>
+    </div>
+    <div class="add-button">
+        <a href="/pens/add"> <button>Add New Pen</button> </a>
+    </div>
+    <div class="clearfix"></div>
+    <hr>
+
+    {% if penList|length > 0 %}
+    <table>
+        <tr>
+            <th> #
+            <th> Pen Code
+            <th> Location
+            <th> Description
+            <th> Capacity
+            <th> Created By
+            <th> Actions
+        </tr>
+        {% set inc = 1 %}
+        {% for pen in penList %}
+        <tr>
+            <td> {{ inc }}
+            <td> {{ pen.penCode }}
+            <td> {{ pen.locationName }}
+            <td> {{ pen.description }}
+            <td> {{ pen.capacity }}
+            <td> {{ pen.createdByUsername }}
+            <td>
+        </tr>
+        {% set inc = inc + 1 %}
+        {% endfor %}
+    </table>
+    {% else %}
+    No results found.
+    {% endif %}
+{% endblock %}

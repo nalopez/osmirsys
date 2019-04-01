@@ -1,0 +1,58 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+    <div class="page-title">
+        <h3> Tenant List </h3>
+    </div>
+    <div class="add-button">
+        <a href="/tenants/add"> <button>Add New Tenant</button> </a>
+    </div>
+    <div class="clearfix"></div>
+    <hr>
+
+    {% if tenantList|length > 0 %}
+    <table>
+        <tr>
+            <th> #
+            <th> Name
+            <th> Address
+            <th> Phone Number
+            <th> Email Address
+            <th> Status
+            <th> Created By
+            <th> Actions
+        </tr>
+        {% set inc = 1 %}
+        {% for tenant in tenantList %}
+        <tr>
+            <td> {{ inc }}
+            <td> {{ tenant.firstName }} {{ tenant.lastName }}
+            <td> {{ tenant.address }}
+            <td> {{ tenant.phoneNumber }}
+            <td> {{ tenant.emailAddress }}
+            <td> {{ tenant.statusName|capitalize }}
+            <td> {{ tenant.createdByUsername }}
+            <td>
+                {% set activateClass = 'activate' %}
+                {% if tenant.statusCode == 'ACT' %}
+                    {% set activateClass = 'deactivate' %}
+                {% endif %}
+
+                <a href="tenants/viewInfo/{{ tenant.tenantId }}">
+                    <div class="action-icon view-info"></div>
+                </a>
+                <a href="tenants/edit/{{ tenant.tenantId }}">
+                    <div class="action-icon edit"></div>
+                </a>
+                <a href="tenants/{{ activateClass }}/{{ tenant.tenantId }}">
+                    <div class="action-icon {{ activateClass }}"></div>
+                </a>
+            </td>
+        </tr>
+        {% set inc = inc + 1 %}
+        {% endfor %}
+    </table>
+    {% else %}
+    No results found.
+    {% endif %}
+{% endblock %}

@@ -7,16 +7,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-
+use AppBundle\Form\UserType;
 use AppBundle\Manager\UserManager;
 
 class UserController extends Controller
 {
     /**
-     * @Route("/users", name="users")
+     * @Route("/users", name="viewUsers")
      */
     public function indexAction(
         Request $request,
@@ -28,10 +25,7 @@ class UserController extends Controller
         }
 
         // Get list of users
-        $userList = $manager->getUsersByFilter([]);
-        if (!is_array($userList)) {
-            $userList = [$userList];
-        }
+        $userList = $manager->getUsersByFilter([], true);
 
         // replace this example code with whatever you need
         return $this->render('user/userList.html.twig', [
@@ -51,28 +45,91 @@ class UserController extends Controller
             return $this->redirectToRoute('login');
         }
 
-        $defaultData = ['createdBy' => $session->get('userId')];
-        $form = $this->createFormBuilder($defaultData)
-            ->add('firstName', TextType::class)
-            ->add('lastName', TextType::class)
-            ->add('username', TextType::class)
-            ->add('password', PasswordType::class)
-            ->add('save', SubmitType::class, ['label' => 'Add User'])
-            ->getForm();
-
+        $form = $this->createForm(UserType::class, [
+            'process' => 'add',
+            'label' => 'Add User',
+            'createdBy' => $session->get('userId'),
+        ]);
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
+
+        if ($form->get('cancel')->isClicked()) {
+            return $this->redirectToRoute('viewUsers');
+        } elseif ($form->get('save')->isClicked() && $form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
+
+            // Unset unnecessary data
+            unset($data['process']);
+            unset($data['label']);
+            unset($data['userId']);
 
             // Save User
             $addResult = $manager->addUser($data);
             if (!empty($addResult)) {
-                return $this->redirectToRoute('users');
+                return $this->redirectToRoute('viewUsers');
             }
         }
 
         // replace this example code with whatever you need
         return $this->render('user/addUser.html.twig', [
+            'formHeader' => 'Add New User',
+            'form' => $form->createView(),
+            'errors' => $form->getErrors(),
+        ]);
+    }
+
+    /**
+     * @Route("/users/edit/{userId}", name="editUser")
+     */
+    public function editUserAction(
+        $userId,
+        Request $request,
+        SessionInterface $session,
+        UserManager $manager
+    ) {
+        if (empty($session->get('userId'))) {
+            return $this->redirectToRoute('login');
+        }
+
+        // get user details
+        $getResult = $manager->getUsersByFilter([
+            'userId' => $userId,
+        ]);
+        if (!$getResult) {
+            // set flash message here
+            return $this->redirectToRoute('viewUsers');
+        }
+
+        $form = $this->createForm(UserType::class, [
+            'process' => 'edit',
+            'label' => 'Edit User',
+            'updatedBy' => $session->get('userId'),
+            'userId' => $getResult->getUserId(),
+            'firstName' => $getResult->getFirstName(),
+            'lastName' => $getResult->getLastName(),
+            'username' => $getResult->getUsername(),
+        ]);
+        $form->handleRequest($request);
+
+        if ($form->get('cancel')->isClicked()) {
+            return $this->redirectToRoute('viewUsers');
+        } elseif ($form->get('save')->isClicked() && $form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+
+            // Unset unnecessary data
+            unset($data['process']);
+            unset($data['label']);
+            unset($data['username']);
+
+            // Edit User
+            $addResult = $manager->updateUser($data);
+            if (!empty($addResult)) {
+                return $this->redirectToRoute('viewUsers');
+            }
+        }
+
+        // replace this example code with whatever you need
+        return $this->render('user/addUser.html.twig', [
+            'formHeader' => 'Edit User',
             'form' => $form->createView(),
         ]);
     }

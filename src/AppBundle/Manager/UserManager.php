@@ -41,12 +41,12 @@ class UserManager
 		$this->sorting = $sorting;
     }
 
-    public function getUsersByFilter($params)
+    public function getUsersByFilter($params, $oneResultArray = false)
     {
     	// Set filter values
     	$this->dtoFilter->setFilters($params);
 
-		return $this->dao->getDataByFilter($this->dtoFilter, $this->pagination, $this->sorting);
+		return $this->dao->getDataByFilter($this->dtoFilter, $this->pagination, $this->sorting, $oneResultArray);
     }
 
     public function addUser($params)
@@ -74,6 +74,22 @@ class UserManager
 
     public function updateUser($params)
     {
+        // Get existing detail for user
+        $userDto = $this->getUsersByFilter([
+            'userId' => $params['userId'],
+        ]);
+
+        if (empty($userDto)) {
+            // Log error here
+            return false;
+        }
+
+        $params['firstName'] = empty($params['firstName']) ? $userDto->getFirstName() : $params['firstName'];
+        $params['lastName'] = empty($params['lastName']) ? $userDto->getLastName() : $params['lastName'];
+        $params['statusId'] = empty($params['statusId']) ? $userDto->getStatusId() : $params['statusId'];
+        $params['password'] = empty($params['password']) ? $userDto->getPassword() : $this->hashPassword($params['password'], $userDto->getSalt());
+        $params['dateUpdated'] = date(ApiConst::DATE_TIME_YMDHIS);
+
     	$this->dto->setValues($params);
 
     	return $this->dao->update($this->dto);

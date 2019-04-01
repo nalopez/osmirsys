@@ -23,7 +23,7 @@ class StatusDAO extends AbstractDAO implements DAOInterface
         $this->dto = $dto;
     }
 
-    public function getDataByFilter($dtoFilter, Pagination $pagination, Sorting $sorting)
+    public function getDataByFilter($dtoFilter, Pagination $pagination, Sorting $sorting, $oneResultArray)
     {
         $queryBuilder = $this->conn->createQueryBuilder();
         $queryBuilder
@@ -42,7 +42,7 @@ class StatusDAO extends AbstractDAO implements DAOInterface
         }
         $returnObj = $resultObj->fetchAll();
 
-        return $this->createDtoCollection($returnObj, $this->dto);
+        return $this->createDtoCollection($returnObj, $this->dto, $oneResultArray);
     }
 
     public function insert($dto)

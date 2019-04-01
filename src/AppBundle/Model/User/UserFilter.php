@@ -8,11 +8,23 @@ use AppBundle\Interfaces\DTOFilterInterface;
 
 class UserFilter extends AbstractFilter implements DTOFilterInterface
 {
+    private $userId;
+
     private $username;
+
+    public function getUserIdFilter()
+    {
+        return $this->userId;
+    }
 
     public function getUsernameFilter()
     {
         return $this->username;
+    }
+
+    public function setUserIdFilter($userId)
+    {
+        $this->userId = $userId;
     }
 
     public function setUsernameFilter($username)
@@ -23,6 +35,7 @@ class UserFilter extends AbstractFilter implements DTOFilterInterface
     public function getArr()
     {
         return [
+            'userId' => $this->getUserIdFilter(),
             'username' => $this->getUsernameFilter(),
         ];
     }
@@ -30,7 +43,8 @@ class UserFilter extends AbstractFilter implements DTOFilterInterface
     public function getFilterToTableMap()
     {
         return [
-            'username' => DbConst::USERS_TBL_USERNAME,
+            'userId' => DbConst::USERS_TBL_ID_A,
+            'username' => DbConst::USERS_TBL_USERNAME_A,
         ];
     }
 }

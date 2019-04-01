@@ -23,7 +23,7 @@ class UserDAO extends AbstractDAO implements DAOInterface
         $this->dto = $dto;
     }
 
-    public function getDataByFilter($dtoFilter, Pagination $pagination, Sorting $sorting)
+    public function getDataByFilter($dtoFilter, Pagination $pagination, Sorting $sorting, $oneResultArray)
     {
         $queryBuilder = $this->conn->createQueryBuilder();
         $queryBuilder
@@ -35,12 +35,14 @@ class UserDAO extends AbstractDAO implements DAOInterface
                 DbConst::USERS_TBL_FIRSTNAME_A,
                 DbConst::USERS_TBL_LASTNAME_A,
                 DbConst::USERS_TBL_LASTLOGIN_A,
+                DbConst::USERS_TBL_STSID_A,
                 DbConst::USERS_TBL_DATECRT_A,
                 DbConst::USERS_TBL_DATEUPD_A,
                 DbConst::USERS_TBL_CRTBY_A,
                 DbConst::USERS_TBL_UPDBY_A,
                 DbConst::STATUSES_TBL_STSNAME_A,
                 DbConst::STATUSES_TBL_STSCODE_A,
+                'usrs.' . DbConst::USERS_TBL_USERNAME . ' as created_by_username',
             ])
             ->from(DbConst::USERS_TBL_NAME, DbConst::USERS_TBL_ALIAS)
             ->innerJoin(
@@ -48,6 +50,12 @@ class UserDAO extends AbstractDAO implements DAOInterface
                 DbConst::STATUSES_TBL_NAME,
                 DbConst::STATUSES_TBL_ALIAS,
                 DbConst::USERS_TBL_STSID_A . " = " . DbConst::STATUSES_TBL_ID_A
+            )
+            ->innerJoin(
+                DbConst::USERS_TBL_ALIAS,
+                DbConst::USERS_TBL_NAME,
+                'usrs',
+                DbConst::USERS_TBL_CRTBY_A . " = usrs." . DbConst::USERS_TBL_ID
             );
 
         $this->generateWhereSetParamClause($queryBuilder, $dtoFilter, $dtoFilter->getFilterToTableMap());
@@ -58,7 +66,7 @@ class UserDAO extends AbstractDAO implements DAOInterface
         }
         $returnObj = $resultObj->fetchAll();
 
-        return $this->createDtoCollection($returnObj, $this->dto);
+        return $this->createDtoCollection($returnObj, $this->dto, $oneResultArray);
     }
 
     public function insert($dto)

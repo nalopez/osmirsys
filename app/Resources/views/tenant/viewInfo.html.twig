@@ -1,0 +1,101 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/tenants.css') }}" />
+{% endblock %}
+
+{% block content %}
+    <div class="page-title">
+        <h3> View Tenant Info </h3>
+    </div>
+    <div class="add-button">
+        <a href="/tenants/printTenantInfo"> <button>Print</button> </a>
+    </div>
+    <div class="clearfix"></div>
+    <hr>
+
+    {% if tenantInfo|length > 0 %}
+        <div class="page-subheader"><h4> Tenant Details </h4></div>
+        <div class="clearfix"></div>
+        <table class="tenant-info-table"
+            <tr>
+                <td> Name
+                <td> {{ tenantInfo.firstName }} {{ tenantInfo.lastName }}
+                <td> Status
+                <td> {{ tenantInfo.statusName }}
+            </tr>
+            <tr>
+                <td> Address
+                <td> {{ tenantInfo.address }}
+                <td> Years of Service
+                <td> << placeholder >>
+            </tr>
+            <tr>
+                <td> Phone Number
+                <td> {{ tenantInfo.phoneNumber }}
+                <td> Profitable Cycle Percentage (PCP)
+                <td> << placeholder >>
+            </tr>
+            <tr>
+                <td> Email Address
+                <td> {{ tenantInfo.emailAddress }}
+                <td> 
+                <td>
+            </tr>
+        </table>
+
+        <div class="tenant-cycle">
+            <div class="page-subheader">
+                <h4> Cycles </h4>
+            </div>
+            <a href="/cycles/add/{{ tenantInfo.tenantId }}"> <button>Add New Cycle</button> </a>
+        
+            <div class="clearfix"></div>
+            {% if tenantCycles|length > 0 %}
+                <table>
+                    <tr>
+                        <th> Cycle No.
+                        <th> Pen Code
+                        <th> Location
+                        <th> Head Count
+                        <th> Start Date
+                        <th> End Date
+                        <th> Status
+                        <th> Actions
+                    </tr>
+                    {% for cycle in tenantCycles %}
+                    <tr>
+                        <td> {{ cycle.cycleCount }}
+                        <td> {{ cycle.penCode }}
+                        <td> {{ cycle.locationName }}
+                        <td> {{ cycle.headCount }}
+                        <td> {{ cycle.startDate }}
+                        <td> {{ cycle.endDate }}
+                        <td> {{ cycle.statusName|capitalize }}
+                        <td>
+                            {% set activateClass = 'activate' %}
+                            {% if cycle.statusCode == 'ACT' %}
+                                {% set activateClass = 'deactivate' %}
+                            {% endif %}
+
+                            <a href="/cycles/edit/{{ cycle.cycleId }}">
+                                <div class="action-icon edit"></div>
+                            </a>
+                            <a href="/cycles/{{ activateClass }}/{{ cycle.cycleId }}">
+                                <div class="action-icon {{ activateClass }}"></div>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                <div class="no-results">No results found.</div>
+            {% endif %}
+        </div>
+
+    {% else %}
+        <div class="no-results">No results found.</div>
+    {% endif %}
+
+    
+{% endblock %}

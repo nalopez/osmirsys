@@ -28,7 +28,7 @@
             <td> {{ user.username }}
             <td> {{ user.firstName }} {{ user.lastName }}
             <td> {{ user.statusName|capitalize }}
-            <td>
+            <td> {{ user.createdByUsername }}
             <td> {{ user.lastLogin }}
             <td>
                 {% set activateClass = 'activate' %}

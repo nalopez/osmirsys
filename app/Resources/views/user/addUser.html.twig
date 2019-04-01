@@ -1,8 +1,24 @@
 {% extends "base.html.twig" %}
 
+{% form_theme form _self %}
+{% block form_row %}
+    <div class="form_row form-field">
+        <div class="form-label">{{ form_label(form) }}</div>
+     	<div class="form-input">{{ form_widget(form) }}</div>
+     	<div class="clearfix"> </div>
+     	<div class="form-error">{{ form_errors(form) }}</div>
+    </div>
+{% endblock form_row %}
+
 {% block content %}
-    <h2> Add New User </h2>
+    <h2> {{ formHeader }} </h2>
     {{ form_start(form) }}
-    {{ form_widget(form) }}
+    {{ form_row(form.firstName) }}
+    {{ form_row(form.lastName) }}
+    {{ form_row(form.username) }}
+    {{ form_row(form.password) }}
+    {{ form_widget(form.save) }}
+    {{ form_widget(form.cancel) }}
     {{ form_end(form) }}
+    
 {% endblock %}

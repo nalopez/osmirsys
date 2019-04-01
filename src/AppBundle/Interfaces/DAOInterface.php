@@ -9,7 +9,7 @@ use AppBundle\Util\Helper\Sorting;
 
 Interface DAOInterface
 {
-	public function getDataByFilter($dtoFilter, Pagination $pagination, Sorting $sorting);
+	public function getDataByFilter($dtoFilter, Pagination $pagination, Sorting $sorting, $oneResultArray);
 
 	public function insert(/*AbstractDTO*/ $dto);
 

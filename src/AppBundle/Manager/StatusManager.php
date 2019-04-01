@@ -34,11 +34,11 @@ class StatusManager
 		$this->sorting = $sorting;
     }
 
-    public function getStatusesByFilter($params)
+    public function getStatusesByFilter($params, $oneResultArray = false)
     {
     	// Set filter values
     	$this->dtoFilter->setFilters($params);
 
-		return $this->dao->getDataByFilter($this->dtoFilter, $this->pagination, $this->sorting);
+		return $this->dao->getDataByFilter($this->dtoFilter, $this->pagination, $this->sorting, $oneResultArray);
     }
 }

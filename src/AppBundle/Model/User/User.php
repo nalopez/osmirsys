@@ -36,6 +36,8 @@ class User extends AbstractDTO implements DTOInterface
 
     private $statusCode;
 
+    private $createdByUsername;
+
     public function getUserId()
     {
         return $this->userId;
@@ -104,6 +106,11 @@ class User extends AbstractDTO implements DTOInterface
     public function getStatusCode()
     {
         return $this->statusCode;
+    }
+
+    public function getCreatedByUsername()
+    {
+        return $this->createdByUsername;
     }
 
     public function setUserId($userId)
@@ -176,6 +183,11 @@ class User extends AbstractDTO implements DTOInterface
         $this->statusCode = $statusCode;
     }
 
+    public function setCreatedByUsername($createdByUsername)
+    {
+        $this->createdByUsername = $createdByUsername;
+    }
+
     public function getArr()
     {
         return [
@@ -193,6 +205,7 @@ class User extends AbstractDTO implements DTOInterface
             'updatedBy' => $this->getUpdatedBy(),
             'statusName' => $this->getStatusName(),
             'statusCode' => $this->getStatusCode(),
+            'createdByUsername' => $this->getCreatedByUsername(),
         ];
     }
 
@@ -208,11 +221,12 @@ class User extends AbstractDTO implements DTOInterface
             'lastLogin' => DbConst::USERS_TBL_LASTLOGIN,
             'statusId' => DbConst::USERS_TBL_STSID,
             'dateCreated' => DbConst::USERS_TBL_DATECRT,
-            'dateUpdated' => DbConst::USERS_TBL_ID,
-            'createdBy' => DbConst::USERS_TBL_DATEUPD,
+            'dateUpdated' => DbConst::USERS_TBL_DATEUPD,
+            'createdBy' => DbConst::USERS_TBL_CRTBY,
             'updatedBy' => DbConst::USERS_TBL_UPDBY,
             'statusName' => DbConst::STATUSES_TBL_STSNAME,
             'statusCode' => DbConst::STATUSES_TBL_STSCODE,
+            'createdByUsername' => 'created_by_username',
         ];
     }
 }

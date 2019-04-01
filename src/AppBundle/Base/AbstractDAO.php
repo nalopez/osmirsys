@@ -36,9 +36,9 @@ class AbstractDAO {
     	}
     }
 
-    public function createDtoCollection($dataResults, $dto)
+    public function createDtoCollection($dataResults, $dto, $oneResultArray)
     {
-    	if (count($dataResults) == 1) {
+    	if (count($dataResults) == 1 && !$oneResultArray) {
     		return $this->createDto($dataResults[0], $dto);
     	}
 
