@@ -65,3 +65,9 @@ d6b37d,172.22.0.1,GET,http://localhost:81/users,1554451077,,200
 520c5e,172.22.0.1,GET,http://localhost:81/tenants,1554451077,,200
 922b28,172.22.0.1,GET,http://localhost:81/pens,1554451078,,200
 773608,172.22.0.1,GET,http://localhost:81/cycles,1554451078,,200
+ade4d2,172.22.0.1,GET,http://localhost:81/tenants/viewInfo/1,1554453080,,200
+ea3ea1,172.22.0.1,GET,http://localhost:81/tenants/viewInfo/1,1554454175,,200
+f73264,172.22.0.1,GET,http://localhost:81/tenants/viewInfo/1,1554454285,,200
+5a616a,172.22.0.1,GET,http://localhost:81/tenants,1554454388,,200
+4deded,172.22.0.1,GET,http://localhost:81/tenants/viewInfo/1,1554454390,,200
+56b81b,172.22.0.1,GET,http://localhost:81/tenants/viewInfo/1,1554454463,,200

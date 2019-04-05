@@ -30,11 +30,11 @@ module.exports = function(grunt) {
             target: {
                 files: [
                     {
-                        src: '../css/custom/base.css',
+                        src: '../css/custom/base.scss',
                         dest: '../css/base.min.css',
                     },
                     {
-                        src: '../css/custom/header.css',
+                        src: '../css/custom/header.scss',
                         dest: '../css/header.min.css',
                     },
                 ]
@@ -42,7 +42,7 @@ module.exports = function(grunt) {
         },
         watch: { // Compile everything into one task with Watch Plugin
             css: {
-                files: '../css/custom/*.css',
+                files: '../css/custom/*.scss',
                 tasks: ['sass', 'cssmin']
             },
             js: {

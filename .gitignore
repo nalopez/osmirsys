@@ -1,0 +1,31 @@
+
+###> symfony/framework-bundle ###
+symfony/.env.local
+symfony/.env.local.php
+symfony/.env.*.local
+symfony/public/bundles/
+symfony/var/
+symfony/vendor/
+###< symfony/framework-bundle ###
+
+###> symfony/web-server-bundle ###
+symfony/.web-server-pid
+###< symfony/web-server-bundle ###
+
+###> symfony/webpack-encore-bundle ###
+symfony/node_modules/
+symfony/public/build/
+symfony/npm-debug.log
+symfony/yarn-error.log
+###< symfony/webpack-encore-bundle ###
+
+###> symfony/webpack-encore-pack ###
+symfony/node_modules/
+symfony/public/build/
+symfony/npm-debug.log
+symfony/yarn-error.log
+###< symfony/webpack-encore-pack ###
+
+###> docker logs ###
+/logs
+###< docker logs ###
