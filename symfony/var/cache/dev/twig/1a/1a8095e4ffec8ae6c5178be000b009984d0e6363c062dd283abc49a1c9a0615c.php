@@ -60,11 +60,11 @@ class __TwigTemplate_5848a14d36ce1622fb80b3da30e6a8de71aee8f07a077504f9334bb66e7
         echo "\" />
         <link rel=\"stylesheet\" href=\"";
         // line 8
-        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("css/base.css"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("css/base.min.css"), "html", null, true);
         echo "\" />
         <link rel=\"stylesheet\" href=\"";
         // line 9
-        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("css/header.css"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("css/header.min.css"), "html", null, true);
         echo "\" />
         ";
         // line 10
@@ -196,8 +196,8 @@ class __TwigTemplate_5848a14d36ce1622fb80b3da30e6a8de71aee8f07a077504f9334bb66e7
         <title>{% block title %} Osmirsys 1.0 {% endblock %}</title>
         <link rel=\"icon\" type=\"image/x-icon\" href=\"{{ asset('favicon.ico') }}\" />
         <link rel=\"stylesheet\" href=\"{{ asset('css/vendor/bootstrap.min.css') }}\" />
-        <link rel=\"stylesheet\" href=\"{{ asset('css/base.css') }}\" />
-        <link rel=\"stylesheet\" href=\"{{ asset('css/header.css') }}\" />
+        <link rel=\"stylesheet\" href=\"{{ asset('css/base.min.css') }}\" />
+        <link rel=\"stylesheet\" href=\"{{ asset('css/header.min.css') }}\" />
         {% block stylesheets %}{% endblock %}
     </head>
     <body>

@@ -1,0 +1,17 @@
+.tenant-info-table tr {
+    background-color: #FFFFFF;
+}
+
+.tenant-info-table td {
+    border: 1px solid black;
+}
+
+.tenant-info-table td:nth-child(1),
+.tenant-info-table td:nth-child(3) {
+    background-color: #C6C6C6;
+}
+
+.tenant-cycle {
+    background: ;
+    margin-top: 20px;
+}
